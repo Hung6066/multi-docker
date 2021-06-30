@@ -1,6 +1,6 @@
+sudo: required
 language: generic 
 
-sudo: required
 services:
   - docker
 
@@ -8,7 +8,7 @@ before_install:
   - docker build -t googleio/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run googleio/react-test npm run test -- --coverage
+  - docker run googleio/react-test npm test -- --coverage
 
 after_success:
   - docker build -t googleio/multi-client ./client
