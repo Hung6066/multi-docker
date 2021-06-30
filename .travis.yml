@@ -5,24 +5,24 @@ services:
   - docker
 
 before_install:
-  - docker build -t hung6066/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t googleio/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true hung6066/react-test npm run test -- --coverage
+  - docker run -e CI=true googleio/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t hung6066/multi-client ./client
-  - docker build -t hung6066/multi-nginx ./nginx
-  - docker build -t hung6066/multi-server ./server
-  - docker build -t hung6066/multi-worker ./worker
+  - docker build -t googleio/multi-client ./client
+  - docker build -t googleio/multi-nginx ./nginx
+  - docker build -t googleio/multi-server ./server
+  - docker build -t googleio/multi-worker ./worker
 
-#Login in to the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#Take those images and push them to docker hub
-- docker push hung6066/multi-client
-- docker push hung6066/multi-nginx
-- docker push hung6066/multi-server
-- docker push hung6066/multi-worker
+  #Login in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Take those images and push them to docker hub
+  - docker push googleio/multi-client
+  - docker push googleio/multi-nginx
+  - docker push googleio/multi-server
+  - docker push googleio/multi-worker
 
 deploy:
   edge: true
