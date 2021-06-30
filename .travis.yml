@@ -23,3 +23,17 @@ after_success:
 - docker push hung6066/multi-nginx
 - docker push hung6066/multi-server
 - docker push hung6066/multi-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-evn
+  bucket_name: elasticbeanstalk-us-east-2-169832313926
+  bucket_path: docker-multi
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
